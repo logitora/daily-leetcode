@@ -45,3 +45,20 @@ So we have if statements that will eventually trigger when a mid point that sati
 Time = O(log n) binary search
 Space = O(1) 
 """
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums)-1
+        while left < right:
+            mid = left + (right - left) // 2
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            else:
+                right = mid
+        return nums[left]
+
+"""
+Less lines of code, same runtime and space complexity. 
+If nums[mid] > nums[right], then everything to the left of nums[mid] will also be greater than nums[mid]. Can disregard everything to the left of this mid
+Else, nums[mid] <= nums[right], could be the pivot point. Everything to the right of this mid can be disregarded since we know that the number will always increase afterwards. 
+"""
